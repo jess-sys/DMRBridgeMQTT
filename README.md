@@ -20,6 +20,20 @@ $ yarn
 
 ### Edit configuration file
 
+Change the following variables to suit your needs.
+
+```json
+{
+  "mqtt": {
+    "serverAddress": "172.30.42.120",
+    "serverPort": 1883,
+    "messageTopic": "DMR/radio0/message",
+    "controlTopic": "DMR/radio0/control"
+  },
+  "soundFilesPath": "/opt/DMRBridgeMQTT/sounds"
+}
+```
+
 ### Install systemd service (optional)
 
 ```bash
