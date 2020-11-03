@@ -56,6 +56,7 @@ class TTS {
             }
 
             await exec(`ffmpeg -i ${path}.tmp.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`);
+            await exec(`rm -rf ${path}.tmp.mp3`);
             logger.log("info: Creating new TTS file (" + path + ")... OK")
         });
     }
