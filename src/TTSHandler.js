@@ -21,8 +21,9 @@ class TTS {
 
     format() {
         let new_message = this.message
+        let new_lang = this.language
 
-        new_message = String(new_message).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase()
+        new_message = String(new_lang) + '-' + String(new_message).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase()
         this.formatted = new_message
         return new_message
     }
