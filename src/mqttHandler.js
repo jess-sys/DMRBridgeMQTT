@@ -1,11 +1,12 @@
 const SysLogger = require('ain2');
 const mqtt = require('mqtt')
 const config = require('../config.json')
+const TTS = require('./TTSHandler')
 
 let logger = console;
 
 if (config.log.mode === "syslog") {
-    logger = new SysLogger({tag: 'apc-mqtt'});
+    logger = new SysLogger({tag: 'DMRBridgeMQTT'});
 }
 
 class Message {
@@ -18,13 +19,21 @@ class Message {
         if (topic !== this.messageTopic) {
             return
         }
+
+        if (!message || ! ('play' in JSON.parse(message)) || !('lang' in JSON.parse(message))) {
+            return
+        }
+
         let parsedMessage = JSON.parse(message)
+        let TTSHandler = new TTS.Handler(parsedMessage)
 
         this.log(topic, message, parsedMessage)
+
+        TTSHandler.getPathOrCreate()
     }
 
     log(topic, message, state) {
-        logger.log("info: MQTT Payload Received (" + state + ")")
+        logger.log("info: MQTT Payload received")
     }
 }
 

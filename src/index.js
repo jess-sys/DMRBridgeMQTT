@@ -15,7 +15,8 @@
         // Listen MQTT commands in the background
         mqttHandler.listen()
     } catch (e) {
+        console.error(e)
+        console.error('error: crashed! Is the MQTT broker running ?')
         process.exit()
-        console.error('error: apc-mqtt crashed! Is the MQTT broker running ?')
     }
 })();

@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "Send predefined audio files on a DMR Network using MQTT",
   "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
   "repository": "https://github.com/jess-sys/DMRBridgeMQTT",
   "author": "Jessy SOBREIRO <jessy.sobreiro@gmail.com>",
   "license": "GPLv2",
   "dependencies": {
     "ain2": "^3.0.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "gtts": "^0.2.1",
     "mqtt": "^4.2.4"
   }
 }
