@@ -54,6 +54,8 @@ $ systemctl DMRBridgeMQTT enable --now
 $ yarn start
 ```
 
+The specified `messageTopic` will be monitored. When a new message is received, it'll build a filename with the payload suffixed with ".wav". It will then try to load this file from the `soundFilesPath` directory. If the file cannot be loaded, a message will be sent on the `controlTopic` topic.
+
 # Useless stuff (copyright)
 
 Copyright (C) 2020 Jessy SOBREIRO
