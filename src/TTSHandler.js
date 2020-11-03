@@ -1,4 +1,4 @@
-let FfmpegCommand = require('fluent-ffmpeg');
+const {exec} = require('child_process');
 const GTTS = require('gtts');
 const fs = require('fs')
 
@@ -22,7 +22,7 @@ class TTS {
     format() {
         let new_message = this.message
 
-        new_message = String(new_message).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase() + '.wav'
+        new_message = String(new_message).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase()
         this.formatted = new_message
         return new_message
     }
@@ -44,24 +44,18 @@ class TTS {
         }
     }
 
-    create() {
+    async create() {
         logger.log("info: Creating new TTS file (" + this.path + ")")
 
         let path = this.path
         let gtts = new GTTS(this.message, this.language)
 
-        gtts.save(path + '.tmp', function (err, result) {
-            if(err) { throw new Error(err) }
-            let my_ffmpeg = new ffmpeg(path + '.tmp')
-            let ffmpeg = new FfmpegCommand()
-            ffmpeg.audioCodec('pcm16le')
-                .audioFrequency(8000)
-                .audioChannels(1)
-                .audioFilters({
-                    filter: 'volume',
-                    options: '2.0'
-                })
-                .output(path)
+        await gtts.save(path + '.tmp', async function (err, result) {
+            if (err) {
+                throw new Error(err)
+            }
+
+            await exec(`ffmpeg -i ${path}.tmp.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`);
             logger.log("info: Creating new TTS file (" + this.path + ")... OK")
         });
     }
@@ -74,18 +68,18 @@ class TTS {
         return new_path
     }
 
-    getPathOrCreate() {
+    async getPathOrCreate() {
         this.format()
         this.getPath()
         this.exists()
 
         if (!this.exist) {
             logger.log("info: TTS File " + this.path + " does not exist, creating it.")
-            this.create()
+            await this.create()
         } else {
             logger.log("info: TTS File " + this.path + " exists.")
         }
-        return this.path
+        return this.path + '.wav'
     }
 }
 

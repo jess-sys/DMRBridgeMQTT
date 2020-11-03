@@ -15,7 +15,7 @@ class Message {
         this.messageTopic = messageTopic
     }
 
-    parse(topic, message) {
+    async parse(topic, message) {
         if (topic !== this.messageTopic) {
             return
         }
@@ -29,7 +29,7 @@ class Message {
 
         this.log(topic, message, parsedMessage)
 
-        TTSHandler.getPathOrCreate()
+        await TTSHandler.getPathOrCreate()
     }
 
     log(topic, message, state) {
@@ -48,7 +48,7 @@ class Handler {
         logger.log(`info: Connecting to MQTT (mqtt://${this.address}:${this.port})`)
     }
 
-    listen() {
+    async listen() {
         let client = mqtt.connect(`mqtt://${this.address}:${this.port}`)
         let address = this.address
         let port = this.port
