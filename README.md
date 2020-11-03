@@ -22,6 +22,10 @@ $ yarn
 
 ### Install systemd service (optional)
 
+```bash
+$ yarn install_service
+```
+
 # Usage
 
 ### As a systemd service
