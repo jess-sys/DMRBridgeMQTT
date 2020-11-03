@@ -1,4 +1,4 @@
-const ffmpeg = require('fluent-ffmpeg');
+let FfmpegCommand = require('fluent-ffmpeg');
 const GTTS = require('gtts');
 const fs = require('fs')
 
@@ -48,23 +48,22 @@ class TTS {
         logger.log("info: Creating new TTS file (" + this.path + ")")
 
         let path = this.path
-        let my_ffmpeg = new ffmpeg()
         let gtts = new GTTS(this.message, this.language)
 
         gtts.save(path + '.tmp', function (err, result) {
             if(err) { throw new Error(err) }
-            console.log('Success! Open file /tmp/hello.mp3 to hear result.');
+            let my_ffmpeg = new ffmpeg(path + '.tmp')
+            let ffmpeg = new FfmpegCommand()
+            ffmpeg.audioCodec('pcm16le')
+                .audioFrequency(8000)
+                .audioChannels(1)
+                .audioFilters({
+                    filter: 'volume',
+                    options: '2.0'
+                })
+                .output(path)
+            logger.log("info: Creating new TTS file (" + this.path + ")... OK")
         });
-
-        my_ffmpeg.audioCodec('pcm16le')
-            .audioFrequency(8000)
-            .audioChannels(1)
-            .audioFilters({
-                filter: 'volume',
-                options: '2.0'
-            })
-            .output(path)
-
     }
 
     getPath() {
