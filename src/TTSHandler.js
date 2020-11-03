@@ -23,7 +23,7 @@ class TTS {
         let new_message = this.message
         let new_lang = this.language
 
-        new_message = String(new_lang) + '-' + String(new_message).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase()
+        new_message = String(new_lang) + '-' + String(new_message).substring(0, 254).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase()
         this.formatted = new_message
         return new_message
     }
@@ -75,10 +75,10 @@ class TTS {
         this.exists()
 
         if (!this.exist) {
-            logger.log("info: TTS File " + this.path + " does not exist, creating it.")
+            logger.log("info: TTS File " + this.path + ".wav does not exist, creating it.")
             await this.create()
         } else {
-            logger.log("info: TTS File " + this.path + " exists.")
+            logger.log("info: TTS File " + this.path + ".wav exists.")
         }
         return this.path + '.wav'
     }
