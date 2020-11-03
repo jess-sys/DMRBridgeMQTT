@@ -50,13 +50,13 @@ class TTS {
         let path = this.path
         let gtts = new GTTS(this.message, this.language)
 
-        await gtts.save(path + '.tmp', async function (err, result) {
+        await gtts.save(path + '.tmp.mp3', async function (err, result) {
             if (err) {
                 throw new Error(err)
             }
 
             await exec(`ffmpeg -i ${path}.tmp.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`);
-            logger.log("info: Creating new TTS file (" + this.path + ")... OK")
+            logger.log("info: Creating new TTS file (" + path + ")... OK")
         });
     }
 
