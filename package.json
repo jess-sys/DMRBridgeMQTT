@@ -5,5 +5,9 @@
   "main": "src/index.js",
   "repository": "https://github.com/jess-sys/DMRBridgeMQTT",
   "author": "Jessy SOBREIRO <jessy.sobreiro@gmail.com>",
-  "license": "GPLv2"
+  "license": "GPLv2",
+  "dependencies": {
+    "ain2": "^3.0.0",
+    "mqtt": "^4.2.4"
+  }
 }

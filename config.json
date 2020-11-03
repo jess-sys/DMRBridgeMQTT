@@ -1,0 +1,12 @@
+{
+  "mqtt": {
+    "serverAddress": "172.30.42.120",
+    "serverPort": 1883,
+    "messageTopic": "DMR/radio0/message",
+    "controlTopic": "DMR/radio0/control"
+  },
+  "log": {
+    "mode": "console"
+  },
+  "soundFilesPath": "/opt/DMRBridgeMQTT/sounds"
+}
