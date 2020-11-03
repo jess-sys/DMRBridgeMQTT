@@ -28,7 +28,7 @@ class TTS {
     }
 
     exists() {
-        let path = this.path
+        let path = this.path + '.wav'
 
         try {
             if (fs.existsSync(path)) {
@@ -45,19 +45,18 @@ class TTS {
     }
 
     async create() {
-        logger.log("info: Creating new TTS file (" + this.path + ")")
+        logger.log("info: Creating new TTS file (" + this.path + ".wav)")
 
         let path = this.path
         let gtts = new GTTS(this.message, this.language)
 
-        await gtts.save(path + '.tmp.mp3', async function (err, result) {
+        await gtts.save(path + '.mp3', async function (err, result) {
             if (err) {
                 throw new Error(err)
             }
 
-            await exec(`ffmpeg -i ${path}.tmp.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`);
-            await exec(`rm -rf ${path}.tmp.mp3`);
-            logger.log("info: Creating new TTS file (" + path + ")... OK")
+            await exec(`ffmpeg -i ${path}.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`);
+            logger.log("info: Creating new TTS file (" + path + ".wav)... OK")
         });
     }
 
