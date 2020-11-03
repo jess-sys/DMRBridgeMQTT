@@ -22,7 +22,7 @@ class TTS {
     format() {
         let new_message = this.message
 
-        new_message = String(new_message).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase()
+        new_message = String(new_message).replace(/\s+/g, '-').replace(/\W/g, '-').toLowerCase() + '.wav'
         this.formatted = new_message
         return new_message
     }
@@ -51,16 +51,19 @@ class TTS {
         let my_ffmpeg = new ffmpeg()
         let gtts = new GTTS(this.message, this.language)
 
-        gtts.stream(
-            my_ffmpeg.audioCodec('pcm16le')
-                .audioFrequency(8000)
-                .audioChannels(1)
-                .audioFilters({
-                    filter: 'volume',
-                    options: '2.0'
-                })
-                .output(path)
-        )
+        gtts.save(path + '.tmp', function (err, result) {
+            if(err) { throw new Error(err) }
+            console.log('Success! Open file /tmp/hello.mp3 to hear result.');
+        });
+
+        my_ffmpeg.audioCodec('pcm16le')
+            .audioFrequency(8000)
+            .audioChannels(1)
+            .audioFilters({
+                filter: 'volume',
+                options: '2.0'
+            })
+            .output(path)
 
     }
 
