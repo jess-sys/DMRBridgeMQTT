@@ -30,7 +30,11 @@ Change the following variables to suit your needs.
     "messageTopic": "DMR/radio0/message",
     "controlTopic": "DMR/radio0/control"
   },
-  "soundFilesPath": "/opt/DMRBridgeMQTT/sounds"
+  "log": {
+    "mode": "console"
+  },
+  "soundFilesPath": "/opt/DMRBridgeMQTT/sounds",
+  "DMRBridgeWAVPath": "/opt/DMRBridgeWAV"
 }
 ```
 
@@ -61,6 +65,11 @@ The specified `messageTopic` topic will be monitored. When a new message is rece
 The filename should be lowercase, all non-alphanumeric characters are forbidden. Spaces will be replaced by dashes.
 
 If the file cannot be loaded, then it'll try to create it using gtts (https://github.com/pndurette/gTTS). It will then store it under the previously defined format name. If the message can't be created, a message will be sent on the `controlTopic` topic.
+
+# Todo
+- TLS support for MQTT
+- Control topic errors
+- pm2 daemon manager support
 
 # Useless stuff (copyright)
 

@@ -4,11 +4,11 @@
   "description": "Send predefined audio files on a DMR Network using MQTT",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "install_service": "sudo ./install_service.sh"
   },
   "repository": "https://github.com/jess-sys/DMRBridgeMQTT",
   "author": "Jessy SOBREIRO <jessy.sobreiro@gmail.com>",
-  "license": "GPLv2",
   "dependencies": {
     "ain2": "^3.0.0",
     "gtts": "^0.2.1",

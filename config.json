@@ -8,5 +8,6 @@
   "log": {
     "mode": "console"
   },
-  "soundFilesPath": "/opt/DMRBridgeMQTT/sounds"
+  "soundFilesPath": "/opt/DMRBridgeMQTT/sounds",
+  "DMRBridgeWAVPath": "/opt/DMRBridgeWAV"
 }

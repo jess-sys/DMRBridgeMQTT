@@ -1,0 +1,13 @@
+[Unit]
+Description=DMRBridgeMQTT.js - A MQTT to DMR Bridge
+Documentation=https://github.com/jess-sys/DMRBridgeMQTT
+After=network.target
+
+[Service]
+Type=simple
+User=sysadmin
+ExecStart=/usr/bin/node /opt/DMRBridgeMQTT/src/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
