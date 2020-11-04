@@ -1,5 +1,5 @@
-const exec = require('exec-sync');
-const GTTS = require('gtts');
+const exec = require('child_process').execSync
+const GTTS = require('gtts')
 const fs = require('fs')
 
 const config = require('../config.json')
@@ -7,7 +7,7 @@ const config = require('../config.json')
 let logger = console;
 
 if (config.log.mode === "syslog") {
-    logger = new SysLogger({tag: 'DMRBridgeMQTT'});
+    logger = new SysLogger({tag: 'DMRBridgeMQTT'})
 }
 
 class TTS {
@@ -62,7 +62,7 @@ class TTS {
                 throw new Error(err)
             }
 
-            exec(`ffmpeg -i ${path}.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`)
+            await exec(`ffmpeg -i ${path}.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`)
             logger.log("info: Creating new TTS file (" + path + ".wav)... OK")
         });
     }

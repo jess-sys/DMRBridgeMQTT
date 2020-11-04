@@ -1,5 +1,5 @@
-const exec = require('exec-sync');
-const SysLogger = require('ain2');
+const exec = require('child_process').execSync
+const SysLogger = require('ain2')
 const mqtt = require('mqtt')
 
 const TTS = require('./TTSHandler')
@@ -8,7 +8,7 @@ const config = require('../config.json')
 let logger = console;
 
 if (config.log.mode === "syslog") {
-    logger = new SysLogger({tag: 'DMRBridgeMQTT'});
+    logger = new SysLogger({tag: 'DMRBridgeMQTT'})
 }
 
 class Message {
