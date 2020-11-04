@@ -1,4 +1,4 @@
-const {exec} = require('child_process');
+const exec = require('exec-sync');
 const SysLogger = require('ain2');
 const mqtt = require('mqtt')
 
@@ -34,7 +34,7 @@ class Message {
         let path = await TTSHandler.getPathOrCreate()
 
         logger.log("info: Contacting DMR Bridge")
-        await exec(`${config.DMRBridgeWAVPath}/DMRBridgeWAV -i ${path}`);
+        exec(`${config.DMRBridgeWAVPath}/DMRBridgeWAV -i ${path}`);
         logger.log("info: Contacting DMR Bridge... OK")
     }
 

@@ -1,4 +1,4 @@
-const {exec} = require('child_process');
+const exec = require('exec-sync');
 const GTTS = require('gtts');
 const fs = require('fs')
 
@@ -62,7 +62,7 @@ class TTS {
                 throw new Error(err)
             }
 
-            await exec(`ffmpeg -i ${path}.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`)
+            exec(`ffmpeg -i ${path}.mp3 -ar 8000 -ac 1 -acodec pcm_s16le ${path}.wav`)
             logger.log("info: Creating new TTS file (" + path + ".wav)... OK")
         });
     }
