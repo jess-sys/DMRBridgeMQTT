@@ -34,7 +34,7 @@ class Message {
         let path = await TTSHandler.getPathOrCreate()
 
         logger.log("info: Contacting DMR Bridge")
-        await exec(`${config.DMRBridgeWAVPath}/DMRBridgeWAV -i ${path}.mp3`);
+        await exec(`${config.DMRBridgeWAVPath}/DMRBridgeWAV -i ${path}`);
         logger.log("info: Contacting DMR Bridge... OK")
     }
 
