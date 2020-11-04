@@ -1,4 +1,4 @@
-const exec = require('child_process').execSync
+const {exec} = require('child_process')
 const SysLogger = require('ain2')
 const mqtt = require('mqtt')
 
