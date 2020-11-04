@@ -26,9 +26,9 @@ class TTS {
         new_message = String(new_lang)
             + '-'
             + String(new_message)
-                .substring(0, 254)
                 .replace(/\s+/g, '-')
                 .replace(/\W/g, '-')
+                .substring(0, 254)
                 .toLowerCase()
         this.formatted = new_message
         return new_message
